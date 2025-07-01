@@ -1,0 +1,112 @@
+<style>
+  .navbar {
+    background-color: #1f1f1f !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #ffffff !important;
+  }
+
+  .nav-link {
+    color: #d1d1d1 !important;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ffffff !important;
+  }
+
+  .dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-item {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+
+  .alert {
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 576px) {
+    .nav-link {
+      margin-right: 0;
+    }
+  }
+</style>
+
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary bg-dark"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Blogify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+
+        <% if (locals.user) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/blog/add-new">Add Blog</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            You
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signup">Create Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signin">Signin</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if (locals.error) { %>
+<div class="container mt-4">
+  <div class="alert alert-danger" role="alert"><%= locals.error %></div>
+</div>
+<% } %>
